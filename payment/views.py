@@ -1,6 +1,5 @@
 from django.utils import timezone
 from decimal import Decimal
-from rest_framework_jwt.settings import api_settings
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,7 +11,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework import generics
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-import uuid
+
 
 
 class RegisterView(APIView):
