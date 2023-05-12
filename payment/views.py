@@ -13,13 +13,19 @@ from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
-
 class RegisterView(APIView):
     def post(self, request):
         name = request.data.get("name")
         email = request.data.get("email")
         password = request.data.get("password")
         User = get_user_model()
+
+        # Check if the username or email has been taken
+        if User.objects.filter(username=name).exists():
+            return Response({"detail": "Username has been taken."}, status=400)
+        if User.objects.filter(email=email).exists():
+            return Response({"detail": "Email has been taken."}, status=400)
+
         user = User.objects.create_user(username=name, email=email, password=password)
 
         # Create UserProfile for the new user
